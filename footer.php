@@ -1,6 +1,7 @@
+  <footer>
+    Visit <a href="https://novaramedia.com/support/">novaramedia.com/support</a> to join our supporter base and power these podcasts—and much more.
+  </footer>
+  </section>
 <?php wp_footer(); ?>
-        </section>
-      </div>
-    </div>
-  </body>
+</body>
 </html>
