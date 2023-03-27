@@ -91,7 +91,7 @@
       <li><a href="https://podfollow.com/acfm/view">ACFM</a></li>
       <li><a href="https://novaramedia.com/category/audio/foreign-agent/">Foreign Agent</a></li>
       <li><a href="https://podfollow.com/planet-b-everything-must-change/view">Planet B</a></li>
-      <li><a href="https://podfollow.com/tyskysour/view">TyskySour Podcast</a></li>
+      <li><a href="https://podfollow.com/novara-live/view">Novara Live Podcast</a></li>
     </ul>
     
     <p>
