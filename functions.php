@@ -7,6 +7,12 @@ function my_scripts_method() {
 }
 add_action('wp_enqueue_scripts', 'my_scripts_method');
 
+function my_styles_method() {
+  $template_dir = get_template_directory_uri();
+  wp_enqueue_style( 'podcast-main-style', $template_dir . '/dist/style.css', array(), '1.0.0' );
+}
+add_action('wp_enqueue_scripts', 'my_styles_method');
+
 if ( function_exists( 'add_theme_support' ) ) {
   add_theme_support( 'post-thumbnails' );
 }

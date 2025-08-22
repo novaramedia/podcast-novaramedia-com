@@ -1,0 +1,33 @@
+{
+  "name": "podcast-novaramedia-com",
+  "version": "1.0.0",
+  "description": "Podcast theme for Novara Media",
+  "scripts": {
+    "dev": "webpack --mode=development",
+    "build": "webpack --mode=production",
+    "watch": "webpack --mode=development --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/novaramedia/podcast-novaramedia-com.git"
+  },
+  "author": "Novara Media",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^7.0.2",
+    "mini-css-extract-plugin": "^2.9.2",
+    "postcss": "^8.5.3",
+    "postcss-loader": "^8.1.1",
+    "postcss-preset-env": "^10.2.3",
+    "style-loader": "^4.0.0",
+    "stylus": "^0.64.0",
+    "stylus-native-loader": "^1.4.3",
+    "webpack": "^5.99.5",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "nm-stylus-library": "github:novaramedia/nm-stylus-library#v0.11.0"
+  }
+}

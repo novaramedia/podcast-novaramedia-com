@@ -44,39 +44,6 @@
   
   <?php wp_head(); ?>
   
-  <style type="text/css">
-    html {
-      background-color: black;
-      color: white;
-      font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
-      font-size: 19px;
-      letter-spacing: .001em;
-    }
-    
-    .container {
-      max-width: 700px;
-      margin: 1rem;
-    }
-    
-    .logomark {
-      max-width: 40px;
-      height: auto;
-    }
-    
-    h1 {
-      font-size: 24px;
-      font-weight: 500;
-    }
-    
-    a {
-      color: white;
-      text-decoration: underline;
-    }
-    
-    a:hover {
-      text-decoration: none;
-    }
-  </style>
 </head>
 <body <?php body_class(); ?>>
   <section class="container">
