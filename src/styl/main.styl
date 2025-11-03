@@ -3,33 +3,20 @@
 
 @import '../../node_modules/nm-stylus-library/index.styl'
 
-// Base styles for the podcast page
 html
   background-color: var(--color-black-soft)
   color: var(--color-white-soft)
-  font-family: var(--font-family-sans)
-  font-size: 19px
-  letter-spacing: 0.001em
-  margin: 0
-  padding: 0
+  font-size: 16px
 
-body
-  margin: 0
-  padding: 0
-
+// Base styles for the podcast page
 .container
-  max-width: 700px
+  max-width: var(--breakpoint-s)
   margin: 1rem
   padding: 0
 
 .logomark
   max-width: 40px
   height: auto
-
-h1
-  font-size: 24px
-  font-weight: 500
-  margin: 0
 
 a
   color: var(--color-white-soft)
@@ -42,6 +29,7 @@ a
 ul
   margin: 1em 0
   padding-left: 2em
+  list-style: disc
 
 li
   margin: 0.5em 0
