@@ -27,7 +27,7 @@ class NM_Podcast_CLI {
 	 *
 	 * @when after_wp_load
 	 */
-	public function fix_audio_urls( $args, $assoc_args ) {
+	public static function fix_audio_urls( $args, $assoc_args ) {
 		$live = (bool) WP_CLI\Utils\get_flag_value( $assoc_args, 'live', false );
 
 		if ( ! $live ) {
@@ -77,15 +77,20 @@ class NM_Podcast_CLI {
 				$new_url
 			) );
 
+			$updated++;
+
 			if ( $live ) {
-				$wpdb->update(
+				$result = $wpdb->update(
 					$wpdb->postmeta,
 					array( 'meta_value' => $new_value ),
 					array( 'meta_id'    => $row->meta_id ),
 					array( '%s' ),
 					array( '%d' )
 				);
-				$updated++;
+				if ( false === $result ) {
+					WP_CLI::warning( sprintf( 'Failed to update meta_id %d (post %d).', $row->meta_id, $row->post_id ) );
+					$updated--;
+				}
 			}
 		}
 
@@ -93,7 +98,7 @@ class NM_Podcast_CLI {
 			WP_CLI::success( sprintf( 'Updated %d row(s).', $updated ) );
 		} else {
 			WP_CLI::line( '' );
-			WP_CLI::line( sprintf( '%d row(s) would be updated. Re-run with --live to apply.', count( $rows ) ) );
+			WP_CLI::line( sprintf( '%d row(s) would be updated. Re-run with --live to apply.', $updated ) );
 		}
 	}
 }

@@ -23,13 +23,16 @@ function nm_fix_enclosure_meta( $meta_id, $object_id, $meta_key, $meta_value ) {
 	}
 
 	global $wpdb;
-	$wpdb->update(
+	$result = $wpdb->update(
 		$wpdb->postmeta,
 		array( 'meta_value' => $rewritten ),
 		array( 'meta_id'    => $meta_id ),
 		array( '%s' ),
 		array( '%d' )
 	);
+	if ( false === $result ) {
+		error_log( "nm_fix_enclosure_meta: failed to rewrite meta_id {$meta_id} on post {$object_id}" );
+	}
 }
 
 /**
