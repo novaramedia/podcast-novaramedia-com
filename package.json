@@ -1,6 +1,6 @@
 {
   "name": "podcast-novaramedia-com",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Podcast theme for Novara Media",
   "scripts": {
     "dev": "webpack --mode=development",
