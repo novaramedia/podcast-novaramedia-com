@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( is_single() ) {
-  $meta = get_post_meta( $post->ID );
+  $meta = get_post_meta( get_the_ID() );
   $redirect = $meta['_cmb_redirect'][0];
   if ( isset( $redirect ) ) {
     header( 'HTTP/1.1 301 Moved Permanently' );
@@ -57,10 +57,12 @@ if ( is_single() ) {
     </header>
     
     <ul class="font-size-12">
-      <li><a href="https://podfollow.com/novaramedia/view">Novara Media Podcast</a></li>
-      <li><a href="https://podfollow.com/acfm/view">ACFM</a></li>
-      <li><a href="https://podfollow.com/if-i-speak/view">If I Speak</a></li>
+      <li><a href="https://podfollow.com/novaramedia/view">Novara Media Main Feed</a></li>
       <li><a href="https://podfollow.com/novara-live/view">Novara Live Podcast</a></li>
+      <li><a href="https://podfollow.com/if-i-speak/view">If I Speak...</a></li>
+      <li><a href="https://podfollow.com/acfm/view">ACFM</a></li>
+      <li><a href="https://novaramedia.com/category/audio/death-in-westminster/">Death in Westminster</a></li>
+      <li><a href="https://novaramedia.com/category/audio/committed/">Committed</a></li>
       <li><a href="https://novaramedia.com/category/audio/foreign-agent/">Foreign Agent</a></li>
       <li><a href="https://podfollow.com/planet-b-everything-must-change/view">Planet B</a></li>
     </ul>
