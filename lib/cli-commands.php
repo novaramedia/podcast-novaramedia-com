@@ -44,6 +44,10 @@ class NM_Podcast_CLI {
 			   AND meta_value LIKE '%storage.googleapis.com/audiofiles.novara.io/%'"
 		);
 
+		if ( $wpdb->last_error ) {
+			WP_CLI::error( 'Database query failed: ' . $wpdb->last_error );
+		}
+
 		if ( empty( $rows ) ) {
 			WP_CLI::success( 'No rows with bad URLs found.' );
 			return;
@@ -56,11 +60,7 @@ class NM_Podcast_CLI {
 		foreach ( $rows as $row ) {
 			$lines   = explode( "\n", $row->meta_value );
 			$old_url = trim( $lines[0] );
-			$new_url = preg_replace(
-				'#^(https?://)storage\.googleapis\.com/audiofiles\.novara\.io/#',
-				'https://audiofiles.novara.io/',
-				$old_url
-			);
+			$new_url = nm_rewrite_audio_url( $old_url );
 
 			if ( $new_url === $old_url ) {
 				continue;
