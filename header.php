@@ -49,7 +49,7 @@ if ( is_single() ) {
   
 </head>
 <body <?php body_class(); ?>>
-  <section class="container">
+  <section class="container" style="max-width: 700px;">
     <header>
       <a href="https://novaramedia.com"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 235 235" class="logomark"><path fill="#000" d="M0 0h235v235H0z"/><path fill="#fff" d="M39.245 166.85h156.51v14.335H39.245V166.85ZM162.973 53.815h29.257v101.99h-30.785v-44.219l-30.08 44.219h-27.691l-30.0798-44.219v44.219H42.8092V53.815h29.4925l29.9233 50.016V53.815h30.785v50.016l29.963-50.016ZM0 235h235V0H0v235Z"/><path fill="#fff" d="M66.5053 88.4386 107.709 148.52h18.251V60.8652h-16.685v68.5028L67.9153 60.8652h-18.095V148.52h16.685V88.4386Z"/></svg></a>
       
@@ -65,6 +65,6 @@ if ( is_single() ) {
       <li><a href="https://podfollow.com/planet-b-everything-must-change/view">Planet B</a></li>
     </ul>
     
-    <p>
+    <p class="font-size-11">
       <a href="https://novaramedia.com">novaramedia.com</a>
     </p>
