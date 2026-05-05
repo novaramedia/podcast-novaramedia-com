@@ -27,6 +27,8 @@ if ( function_exists( 'add_image_size' ) ) {
 
 get_template_part( 'lib/post-types' );
 get_template_part( 'lib/meta-boxes' );
+get_template_part( 'lib/audio-url-fix' );
+get_template_part( 'lib/cli-commands' );
 
 /**
  * Deregister unneeded WordPress helper JavaScript files.
