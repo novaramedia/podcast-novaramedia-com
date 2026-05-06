@@ -1,8 +1,11 @@
 /*
 Theme Name: podcast-novaramedia-com
 Theme URI: podcast.novaramedia.com
-Description: 2022 Version
-Version: 1.1.0
+Description: Podcast landing page theme for podcast.novaramedia.com
+Version: 1.2.0
 Author: Novara Media
 Author URI: novaramedia.com
 */
+
+/* This file is required by WordPress for theme activation.
+   The actual styles are built from Stylus files and loaded via functions.php */

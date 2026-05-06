@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-05-06
+
+### Added
+
+- Webpack build pipeline with Stylus compilation and nm-stylus-library design system
+
+### Changed
+
+- Landing page layout and styles updated to match current novaramedia.com design
+- Updated podcast directory links
+
 ## [1.1.0] - 2026-05-05
 
 ### Added

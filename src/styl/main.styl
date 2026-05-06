@@ -1,0 +1,37 @@
+// Podcast Theme Styles using nm-stylus-library
+// Import the design system library
+
+@import '../../node_modules/nm-stylus-library/index.styl'
+
+html
+  background-color: var(--color-black-soft)
+  color: var(--color-white-soft)
+  font-size: 16px
+
+// Base styles for the podcast page
+.container
+  margin: 1rem
+  padding: 0
+
+.logomark
+  max-width: 40px
+  height: auto
+
+a
+  color: var(--color-white-soft)
+  text-decoration: underline
+
+  &:hover
+    text-decoration: none
+
+// Keep list styling simple
+ul
+  margin: 1em 0
+  padding-left: 2em
+  list-style: disc
+
+li
+  margin: 0.5em 0
+
+p
+  margin: 1em 0
