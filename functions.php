@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function my_styles_method() {
   $template_dir = get_template_directory_uri();
-  wp_enqueue_style( 'podcast-main-style', $template_dir . '/dist/style.css', array(), '1.0.0' );
+  wp_enqueue_style( 'podcast-main-style', $template_dir . '/dist/style.css', array(), filemtime( get_template_directory() . '/dist/style.css' ) );
 }
 add_action( 'wp_enqueue_scripts', 'my_styles_method' );
 
