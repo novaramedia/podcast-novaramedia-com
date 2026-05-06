@@ -79,6 +79,7 @@ add_filter( 'show_admin_bar', '__return_false' );
  */
 function nm_allowed_redirect_hosts( $hosts ) {
   $hosts[] = 'novaramedia.com';
+  $hosts[] = 'www.novaramedia.com';
   return $hosts;
 }
 add_filter( 'allowed_redirect_hosts', 'nm_allowed_redirect_hosts' );
