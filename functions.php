@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Enqueues the main stylesheet from the theme's dist directory.
  *
- * @since 1.0.0
+ * @since 1.2.0
  * @return void
  */
 function my_styles_method() {
