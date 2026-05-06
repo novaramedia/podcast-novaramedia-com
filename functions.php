@@ -67,6 +67,25 @@ function wps_deregister_styles() {
 add_filter( 'show_admin_bar', '__return_false' );
 
 /**
+ * Allow cross-domain redirects to novaramedia.com.
+ *
+ * Single post redirects stored in _cmb_redirect meta target novaramedia.com.
+ * This filter adds that host to the list of allowed redirect destinations so
+ * wp_safe_redirect() permits the redirect rather than falling back to
+ * admin_url() via wp_validate_redirect().
+ *
+ * @since 1.3.0
+ * @param string[] $hosts Allowed redirect hostnames.
+ * @return string[] Modified list of allowed redirect hostnames.
+ */
+function nm_allowed_redirect_hosts( $hosts ) {
+  $hosts[] = 'novaramedia.com';
+  $hosts[] = 'www.novaramedia.com';
+  return $hosts;
+}
+add_filter( 'allowed_redirect_hosts', 'nm_allowed_redirect_hosts' );
+
+/**
  * Remove WordPress version number from HTML meta tags.
  *
  * Returns an empty string to hide the WordPress version information

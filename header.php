@@ -4,11 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( is_single() ) {
-  $meta = get_post_meta( get_the_ID() );
-  $redirect = $meta['_cmb_redirect'][0];
-  if ( isset( $redirect ) ) {
-    header( 'HTTP/1.1 301 Moved Permanently' );
-    header( 'Location: ' . $redirect );
+  $redirect = get_post_meta( get_the_ID(), '_cmb_redirect', true );
+  if ( ! empty( $redirect ) ) {
+    wp_safe_redirect( $redirect, 301 );
     exit;
   }
 }

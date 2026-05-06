@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-05-06
+
+### Security
+
+- Fixed open redirect vulnerability in single-post redirect: replaced raw `header('Location: …')` with `wp_safe_redirect()`, which validates the redirect destination against an allowlist
+- Fixed PHP notice when `_cmb_redirect` post meta is absent by using `get_post_meta()` with the `$single` parameter instead of indexing the full meta array
+- Added `allowed_redirect_hosts` filter to permit intentional cross-domain redirects to `novaramedia.com`
+
 ## [1.2.0] - 2026-05-06
 
 ### Added
