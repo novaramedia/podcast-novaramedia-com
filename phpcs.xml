@@ -180,11 +180,11 @@
   <rule ref="Generic.ControlStructures.DisallowYodaConditions"/>
 
   <rule ref="WordPress">
-    <!-- Ternarys are fine tbh -->
+    <!-- Ternaries are fine tbh -->
     <exclude name="WordPress.PHP.DisallowShortTernary.Found" />
     <!-- Its fine to output unescaped strings tbh, tho perhaps we could config here more for variables -->
     <exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped" />
-    <!-- Allow space indents (part of intentation configs) -->
+    <!-- Allow space indents (part of indentation configs) -->
     <exclude name="Generic.WhiteSpace.DisallowSpaceIndent" />
     <!-- For now dont bother with all global prefixed. It seems too much for variables -->
     <exclude name="WordPress.NamingConventions.PrefixAllGlobals" />
@@ -234,7 +234,7 @@
         <!-- <element key="print_r" value="null"/> -->
         <element key="eval" value="null"/>
         <element key="compact" value="null"/>
-        <!-- Add depreciated functions here! -->
+        <!-- Add deprecated functions here! -->
       </property>
     </properties>
   </rule>

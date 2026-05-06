@@ -26,6 +26,6 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
-    "nm-stylus-library": "git+https://github.com/novaramedia/nm-stylus-library.git#v0.13.0"
+    "nm-stylus-library": "https://github.com/novaramedia/nm-stylus-library/archive/refs/tags/v0.13.0.tar.gz"
   }
 }

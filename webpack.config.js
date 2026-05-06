@@ -51,7 +51,7 @@ module.exports = (env, argv) => {
     ],
 
     optimization: {
-      minimizer: isProduction ? [new CssMinimizerPlugin()] : [],
+      minimizer: isProduction ? ['...', new CssMinimizerPlugin()] : [],
     },
 
     devtool: isProduction ? false : 'source-map',
