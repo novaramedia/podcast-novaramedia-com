@@ -71,7 +71,8 @@ add_filter( 'show_admin_bar', '__return_false' );
  *
  * Single post redirects stored in _cmb_redirect meta target novaramedia.com.
  * This filter adds that host to the list of allowed redirect destinations so
- * wp_safe_redirect() permits the redirect rather than falling back to wp_login_url().
+ * wp_safe_redirect() permits the redirect rather than falling back to
+ * admin_url() via wp_validate_redirect().
  *
  * @since 1.3.0
  * @param string[] $hosts Allowed redirect hostnames.
