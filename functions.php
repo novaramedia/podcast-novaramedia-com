@@ -98,3 +98,62 @@ function no_generator() {
   return '';
 }
 add_filter( 'the_generator', 'no_generator' );
+
+// Category ID for the "Novara Audio Main Feed" wrapper — children are individual shows.
+define( 'NM_AUDIO_CAT_ID', 1522 );
+
+// Resolve the show prefix for a post from its category name.
+function nm_get_show_prefix( $post_id ) {
+  $show_cat = null;
+
+  foreach ( get_the_category( $post_id ) as $cat ) {
+    if ( in_array( $cat->slug, [ 'audio', 'uncategorized' ], true ) ) {
+      continue;
+    }
+    // Prefer children of the audio wrapper; fall back to any non-skipped category.
+    if ( null === $show_cat || (int) $cat->parent === NM_AUDIO_CAT_ID ) {
+      $show_cat = $cat;
+    }
+  }
+
+  return $show_cat ? $show_cat->name : null;
+}
+
+// Auto-prefix "<Show Name>: " on the true main feed and the audio wrapper category feed.
+function nm_autopreffix_title_on_main_feeds( $title ) {
+  $is_true_main   = ! is_category() && ! is_tax() && ! is_tag();
+  $is_audio_cat   = is_category( NM_AUDIO_CAT_ID );
+
+  if ( ! $is_true_main && ! $is_audio_cat ) {
+    return $title;
+  }
+
+  $prefix = nm_get_show_prefix( get_the_ID() );
+  if ( ! $prefix ) {
+    return $title;
+  }
+
+  // Already prefixed (historical content has it baked into the post title).
+  if ( 0 === strpos( $title, $prefix . ': ' ) ) {
+    return $title;
+  }
+
+  return $prefix . ': ' . $title;
+}
+add_filter( 'the_title_rss', 'nm_autopreffix_title_on_main_feeds', 11 );
+
+// Strip "<Show Name>: " prefix from episode titles on single-show feeds.
+// Skips the audio wrapper feed (1522) — that one needs the prefixes.
+function nm_strip_show_prefix_on_category_feeds( $title ) {
+  if ( is_category( NM_AUDIO_CAT_ID ) ) {
+    return $title;
+  }
+  if ( is_category() || is_tax() || is_tag() ) {
+    $pos = strpos( $title, ': ' );
+    if ( false !== $pos ) {
+      $title = substr( $title, $pos + 2 );
+    }
+  }
+  return $title;
+}
+add_filter( 'the_title_rss', 'nm_strip_show_prefix_on_category_feeds', 12 );
