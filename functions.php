@@ -107,7 +107,7 @@ function nm_get_show_prefix( $post_id ) {
   $show_cat = null;
 
   foreach ( get_the_category( $post_id ) as $cat ) {
-    if ( in_array( $cat->slug, [ 'audio', 'uncategorized' ], true ) ) {
+    if ( in_array( $cat->slug, array( 'audio', 'uncategorized' ), true ) ) {
       continue;
     }
     // Prefer children of the audio wrapper; fall back to any non-skipped category.
@@ -120,9 +120,9 @@ function nm_get_show_prefix( $post_id ) {
 }
 
 // Auto-prefix "<Show Name>: " on the true main feed and the audio wrapper category feed.
-function nm_autopreffix_title_on_main_feeds( $title ) {
-  $is_true_main   = ! is_category() && ! is_tax() && ! is_tag();
-  $is_audio_cat   = is_category( NM_AUDIO_CAT_ID );
+function nm_autoprefix_title_on_main_feeds( $title ) {
+  $is_true_main = is_feed( 'podcast' ) && ! is_category() && ! is_tax() && ! is_tag();
+  $is_audio_cat = is_category( NM_AUDIO_CAT_ID );
 
   if ( ! $is_true_main && ! $is_audio_cat ) {
     return $title;
@@ -140,18 +140,19 @@ function nm_autopreffix_title_on_main_feeds( $title ) {
 
   return $prefix . ': ' . $title;
 }
-add_filter( 'the_title_rss', 'nm_autopreffix_title_on_main_feeds', 11 );
+add_filter( 'the_title_rss', 'nm_autoprefix_title_on_main_feeds', 11 );
 
 // Strip "<Show Name>: " prefix from episode titles on single-show feeds.
 // Skips the audio wrapper feed (1522) — that one needs the prefixes.
+// Only strips when the title actually starts with the post's own show prefix.
 function nm_strip_show_prefix_on_category_feeds( $title ) {
   if ( is_category( NM_AUDIO_CAT_ID ) ) {
     return $title;
   }
   if ( is_category() || is_tax() || is_tag() ) {
-    $pos = strpos( $title, ': ' );
-    if ( false !== $pos ) {
-      $title = substr( $title, $pos + 2 );
+    $prefix = nm_get_show_prefix( get_the_ID() );
+    if ( $prefix && 0 === strpos( $title, $prefix . ': ' ) ) {
+      $title = substr( $title, strlen( $prefix ) + 2 );
     }
   }
   return $title;
