@@ -134,8 +134,9 @@ function nm_autoprefix_title_on_main_feeds( $title ) {
     return $title;
   }
 
+  $audio_id     = nm_audio_cat_id();
   $is_true_main = ! is_category() && ! is_tax() && ! is_tag() && ! is_author() && ! is_date() && ! is_search();
-  $is_audio_cat = is_category( nm_audio_cat_id() );
+  $is_audio_cat = ( null !== $audio_id ) && is_category( $audio_id );
 
   if ( ! $is_true_main && ! $is_audio_cat ) {
     return $title;
@@ -162,7 +163,8 @@ function nm_strip_show_prefix_on_category_feeds( $title ) {
   if ( ! is_feed( 'podcast' ) ) {
     return $title;
   }
-  if ( is_category( nm_audio_cat_id() ) ) {
+  $audio_id = nm_audio_cat_id();
+  if ( null !== $audio_id && is_category( $audio_id ) ) {
     return $title;
   }
   if ( is_category() ) {
