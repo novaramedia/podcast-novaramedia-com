@@ -100,11 +100,12 @@ function no_generator() {
 add_filter( 'the_generator', 'no_generator' );
 
 // Resolve the "Novara Audio Main Feed" wrapper category ID by slug at runtime.
+// Returns null if the term doesn't exist, so callers can skip parent-preference logic safely.
 function nm_audio_cat_id() {
-  static $id = null;
-  if ( null === $id ) {
+  static $id = false;
+  if ( false === $id ) {
     $term = get_term_by( 'slug', 'audio', 'category' );
-    $id   = $term ? (int) $term->term_id : 0;
+    $id   = $term ? (int) $term->term_id : null;
   }
   return $id;
 }
@@ -118,7 +119,8 @@ function nm_get_show_prefix( $post_id ) {
       continue;
     }
     // Prefer children of the audio wrapper; fall back to any non-skipped category.
-    if ( null === $show_cat || (int) $cat->parent === nm_audio_cat_id() ) {
+    $audio_id = nm_audio_cat_id();
+    if ( null === $show_cat || ( null !== $audio_id && (int) $cat->parent === $audio_id ) ) {
       $show_cat = $cat;
     }
   }
@@ -163,7 +165,7 @@ function nm_strip_show_prefix_on_category_feeds( $title ) {
   if ( is_category( nm_audio_cat_id() ) ) {
     return $title;
   }
-  if ( is_category() || is_tax() || is_tag() ) {
+  if ( is_category() ) {
     $prefix = nm_get_show_prefix( get_the_ID() );
     if ( $prefix && 0 === strpos( $title, $prefix . ': ' ) ) {
       $title = substr( $title, strlen( $prefix ) + 2 );
