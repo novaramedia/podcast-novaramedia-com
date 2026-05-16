@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- RSS feed title prefixing: main and audio-wrapper feeds auto-prefix episode titles with the show name (e.g. "Novara FM: Episode Title"); single-show category feeds strip the prefix as redundant
+
 ## [1.3.0] - 2026-05-06
 
 ### Security
