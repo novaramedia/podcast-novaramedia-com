@@ -99,8 +99,15 @@ function no_generator() {
 }
 add_filter( 'the_generator', 'no_generator' );
 
-// Category ID for the "Novara Audio Main Feed" wrapper — children are individual shows.
-define( 'NM_AUDIO_CAT_ID', 1522 );
+// Resolve the "Novara Audio Main Feed" wrapper category ID by slug at runtime.
+function nm_audio_cat_id() {
+  static $id = null;
+  if ( null === $id ) {
+    $term = get_term_by( 'slug', 'audio', 'category' );
+    $id   = $term ? (int) $term->term_id : 0;
+  }
+  return $id;
+}
 
 // Resolve the show prefix for a post from its category name.
 function nm_get_show_prefix( $post_id ) {
@@ -111,7 +118,7 @@ function nm_get_show_prefix( $post_id ) {
       continue;
     }
     // Prefer children of the audio wrapper; fall back to any non-skipped category.
-    if ( null === $show_cat || (int) $cat->parent === NM_AUDIO_CAT_ID ) {
+    if ( null === $show_cat || (int) $cat->parent === nm_audio_cat_id() ) {
       $show_cat = $cat;
     }
   }
@@ -121,8 +128,12 @@ function nm_get_show_prefix( $post_id ) {
 
 // Auto-prefix "<Show Name>: " on the true main feed and the audio wrapper category feed.
 function nm_autoprefix_title_on_main_feeds( $title ) {
-  $is_true_main = is_feed( 'podcast' ) && ! is_category() && ! is_tax() && ! is_tag();
-  $is_audio_cat = is_category( NM_AUDIO_CAT_ID );
+  if ( ! is_feed( 'podcast' ) ) {
+    return $title;
+  }
+
+  $is_true_main = ! is_category() && ! is_tax() && ! is_tag() && ! is_author() && ! is_date() && ! is_search();
+  $is_audio_cat = is_category( nm_audio_cat_id() );
 
   if ( ! $is_true_main && ! $is_audio_cat ) {
     return $title;
@@ -143,10 +154,13 @@ function nm_autoprefix_title_on_main_feeds( $title ) {
 add_filter( 'the_title_rss', 'nm_autoprefix_title_on_main_feeds', 11 );
 
 // Strip "<Show Name>: " prefix from episode titles on single-show feeds.
-// Skips the audio wrapper feed (1522) — that one needs the prefixes.
+// Skips the audio wrapper feed — that one needs the prefixes.
 // Only strips when the title actually starts with the post's own show prefix.
 function nm_strip_show_prefix_on_category_feeds( $title ) {
-  if ( is_category( NM_AUDIO_CAT_ID ) ) {
+  if ( ! is_feed( 'podcast' ) ) {
+    return $title;
+  }
+  if ( is_category( nm_audio_cat_id() ) ) {
     return $title;
   }
   if ( is_category() || is_tax() || is_tag() ) {
